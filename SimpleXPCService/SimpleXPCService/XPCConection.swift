@@ -10,20 +10,28 @@ import Foundation
 import XPCService
 
 class SimpleConnectionController: NSObject {
-    lazy var connection: NSXPCConnection = {
-        let result = NSXPCConnection(serviceName: "com.mipt.test")
+    private class func connectionToService() -> NSXPCConnection {
+        let result = NSXPCConnection(serviceName: "com.mipt.DummyService")
         result.remoteObjectInterface = NSXPCInterface(withProtocol: SimpleProtocol.self)
         return result
-    }()
-    
-    var proxy: SimpleProtocol {
-        return (self.connection as? SimpleProtocol)!
     }
     
-    func start() {
+    var objectProxy: SimpleProtocol {
+        return self.connection.remoteObjectProxy as! SimpleProtocol
+    }
+    
+    
+    struct Singleton {
+        static let instance = SimpleConnectionController()
+    }
+    class var sharedInstance: SimpleConnectionController { return Singleton.instance }
+    
+    private let connection = SimpleConnectionController.connectionToService()
+    override init() {
+        super.init()
         self.connection.resume()
     }
-    func stop() {
+    deinit {
         self.connection.invalidate()
     }
 }

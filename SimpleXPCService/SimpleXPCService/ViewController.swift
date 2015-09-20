@@ -9,19 +9,13 @@
 import Cocoa
 
 class ViewController: NSViewController {
-    let connection = SimpleConnectionController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        connection.start()
+        SimpleConnectionController.sharedInstance.objectProxy.generateSomeNumber(1000)
+
     }
     
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        connection.proxy.generateSomeNumber(1000)
-        
-    }
-
     override var representedObject: AnyObject? {
         didSet {
         // Update the view, if already loaded.
