@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import XPCService
 
 class SimpleConnectionController: NSObject {
     lazy var connection: NSXPCConnection = {
@@ -16,7 +17,7 @@ class SimpleConnectionController: NSObject {
     }()
     
     var proxy: SimpleProtocol {
-        return (self.result.connection as? ServiceProtocol)!
+        return (self.connection as? SimpleProtocol)!
     }
     
     func start() {
