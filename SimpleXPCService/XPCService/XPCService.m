@@ -17,9 +17,11 @@
     reply(response);
 }
 
-- (void)generateSomeNumber:(UInt32)maxNumber {
+- (void)generateSomeNumber:(UInt32)maxNumber withReply:(void (^)(NSString *))reply
+{
     int number = arc4random_uniform(maxNumber);
-    printf("Random numer created: %d\n", number);
+    NSString *result = [[NSString alloc] initWithFormat:@"%d", number];
+    reply(result);
 }
 
 @end

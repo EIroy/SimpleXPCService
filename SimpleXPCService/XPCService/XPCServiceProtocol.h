@@ -13,7 +13,7 @@
 
 // Replace the API of this protocol with an API appropriate to the service you are vending.
 - (void)upperCaseString:(NSString *)aString withReply:(void (^)(NSString *))reply;
-- (void)generateSomeNumber:(UInt32)maxNumber;
+- (void)generateSomeNumber:(UInt32)maxNumber withReply:(void (^)(NSString *))reply;
 
     
 @end

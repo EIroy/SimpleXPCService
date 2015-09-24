@@ -11,7 +11,7 @@ import XPCService
 
 class SimpleConnectionController: NSObject {
     private class func connectionToService() -> NSXPCConnection {
-        let result = NSXPCConnection(serviceName: "com.mipt.DummyService")
+        let result = NSXPCConnection(serviceName: "mipt.XPCService")
         result.remoteObjectInterface = NSXPCInterface(withProtocol: SimpleProtocol.self)
         return result
     }

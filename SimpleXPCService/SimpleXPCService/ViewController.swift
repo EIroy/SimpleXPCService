@@ -9,10 +9,12 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
+    let connector = SimpleConnectionController.sharedInstance
     override func viewDidLoad() {
         super.viewDidLoad()
-        SimpleConnectionController.sharedInstance.objectProxy.generateSomeNumber(1000)
+        self.connector.objectProxy.generateSomeNumber(200) { result in
+            print("the result is \(result)")
+        }
 
     }
     
